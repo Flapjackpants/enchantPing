@@ -3,7 +3,7 @@
 	"id": "enchantping",
 	"version": "${version}",
 	"name": "EnchantPing",
-	"description": "Plays a configurable sound when you reach a target XP level.",
+	"description": "Plays a configurable sound when you reach a target XP level, and previews all enchanting table enchantments on hover.",
 	"authors": [
 		"Maxwell Li"
 	],
@@ -27,5 +27,11 @@
 	},
 	"suggests": {
 		"modmenu": "*"
-	}
+	},
+	"mixins": [
+		{
+			"config": "enchantping.client.mixins.json",
+			"environment": "client"
+		}
+	]
 }

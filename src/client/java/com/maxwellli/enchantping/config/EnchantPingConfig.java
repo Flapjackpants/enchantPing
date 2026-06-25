@@ -10,6 +10,9 @@ public class EnchantPingConfig implements ConfigData {
 	public boolean enabled = true;
 
 	@ConfigEntry.Gui.Tooltip(count = 2)
+	public boolean showEnchantmentPreview = true;
+
+	@ConfigEntry.Gui.Tooltip(count = 2)
 	@ConfigEntry.BoundedDiscrete(min = 1, max = 100)
 	public int targetLevel = 30;
 
