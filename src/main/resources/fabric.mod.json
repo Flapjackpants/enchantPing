@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "enchantping",
+	"version": "${version}",
+	"name": "EnchantPing",
+	"description": "Plays a configurable sound when you reach a target XP level.",
+	"authors": [
+		"Maxwell Li"
+	],
+	"license": "MIT",
+	"icon": "assets/enchantping/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.maxwellli.enchantping.EnchantPingClient"
+		],
+		"modmenu": [
+			"com.maxwellli.enchantping.integration.ModMenuIntegration"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": ">=26.1.2 <26.3",
+		"java": ">=25",
+		"fabric-api": "*",
+		"cloth-config": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

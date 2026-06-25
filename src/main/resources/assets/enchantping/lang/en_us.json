@@ -1,0 +1,16 @@
+{
+	"text.enchantping.name": "EnchantPing",
+	"text.enchantping.config.title": "EnchantPing Settings",
+	"text.enchantping.config.enabled": "Enabled",
+	"text.enchantping.config.enabled.tooltip": "Play a sound when you cross the target XP level.",
+	"text.enchantping.config.target_level": "Target Level",
+	"text.enchantping.config.target_level.tooltip": "XP level that triggers the notification when crossed upward.",
+	"text.enchantping.config.sound": "Notification Sound",
+	"text.enchantping.config.volume": "Volume",
+	"text.enchantping.sound.enchantment_table": "Enchantment Table",
+	"text.enchantping.sound.note_block_pling": "Note Block Pling",
+	"text.enchantping.sound.experience_orb": "Experience Orb",
+	"text.enchantping.sound.player_levelup": "Player Level Up",
+	"text.enchantping.sound.bell": "Bell",
+	"text.enchantping.sound.ui_toast_challenge": "Challenge Complete"
+}
