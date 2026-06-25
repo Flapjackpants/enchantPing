@@ -3,6 +3,9 @@
 	"package": "com.maxwellli.enchantping.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
+		"EnchantmentMenuInvoker",
+		"EnchantmentMenuMixin",
+		"AbstractContainerScreenInvoker",
 		"EnchantmentScreenMixin"
 	],
 	"injectors": {

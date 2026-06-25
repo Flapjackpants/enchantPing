@@ -1,35 +1,38 @@
 package com.maxwellli.enchantping.enchant;
 
+import com.maxwellli.enchantping.mixin.AbstractContainerScreenInvoker;
+import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
+import net.minecraft.world.inventory.EnchantmentMenu;
+
 public final class EnchantmentPreviewLayout {
-	public static final int IMAGE_WIDTH = 176;
-	public static final int IMAGE_HEIGHT = 166;
 	public static final int BUTTON_X_OFFSET = 60;
 	public static final int BUTTON_Y_OFFSET = 14;
-	public static final int BUTTON_HEIGHT = 19;
+	public static final int BUTTON_ROW_HEIGHT = 19;
 	public static final int BUTTON_WIDTH = 108;
+	public static final int BUTTON_HEIGHT = 17;
 	public static final int BUTTON_COUNT = 3;
 
 	private EnchantmentPreviewLayout() {
 	}
 
-	public static boolean isHoveringButton(int leftPos, int topPos, int mouseX, int mouseY, int buttonIndex) {
-		if (buttonIndex < 0 || buttonIndex >= BUTTON_COUNT) {
-			return false;
-		}
+	public static int getHoveredSlot(EnchantmentScreen screen, double mouseX, double mouseY) {
+		EnchantmentMenu menu = screen.getMenu();
+		AbstractContainerScreenInvoker accessor = (AbstractContainerScreenInvoker) screen;
 
-		int buttonX = leftPos + BUTTON_X_OFFSET;
-		int buttonY = topPos + BUTTON_Y_OFFSET + buttonIndex * BUTTON_HEIGHT;
+		for (int slot = 0; slot < BUTTON_COUNT; slot++) {
+			if (!accessor.enchantping$isHovering(
+					BUTTON_X_OFFSET,
+					BUTTON_Y_OFFSET + slot * BUTTON_ROW_HEIGHT,
+					BUTTON_WIDTH,
+					BUTTON_HEIGHT,
+					mouseX,
+					mouseY
+			)) {
+				continue;
+			}
 
-		return mouseX >= buttonX
-				&& mouseX < buttonX + BUTTON_WIDTH
-				&& mouseY >= buttonY
-				&& mouseY < buttonY + BUTTON_HEIGHT;
-	}
-
-	public static int getHoveredButtonIndex(int leftPos, int topPos, int mouseX, int mouseY) {
-		for (int i = 0; i < BUTTON_COUNT; i++) {
-			if (isHoveringButton(leftPos, topPos, mouseX, mouseY, i)) {
-				return i;
+			if (menu.costs[slot] > 0 && menu.levelClue[slot] >= 0) {
+				return slot;
 			}
 		}
 
