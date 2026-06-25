@@ -14,7 +14,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.inventory.EnchantmentMenu;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,25 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(EnchantmentScreen.class)
-public abstract class EnchantmentScreenMixin {
-	@Shadow
-	protected EnchantmentMenu menu;
-
-	@Shadow
-	protected int leftPos;
-
-	@Shadow
-	protected int topPos;
-
-	@Shadow
-	public int width;
-
-	@Shadow
-	public int height;
-
-	@Shadow
-	public Minecraft minecraft;
-
+public class EnchantmentScreenMixin {
 	@Inject(method = "extractRenderState", at = @At("TAIL"))
 	private void enchantping$renderPreviewTooltip(
 			GuiGraphicsExtractor graphics,
@@ -55,9 +36,16 @@ public abstract class EnchantmentScreenMixin {
 			return;
 		}
 
+		Minecraft minecraft = Minecraft.getInstance();
 		if (minecraft.level == null) {
 			return;
 		}
+
+		EnchantmentScreen screen = (EnchantmentScreen) (Object) this;
+		EnchantmentMenu menu = screen.getMenu();
+
+		int leftPos = (screen.width - EnchantmentPreviewLayout.IMAGE_WIDTH) / 2;
+		int topPos = (screen.height - EnchantmentPreviewLayout.IMAGE_HEIGHT) / 2;
 
 		int hoveredButton = EnchantmentPreviewLayout.getHoveredButtonIndex(leftPos, topPos, mouseX, mouseY);
 		if (hoveredButton < 0) {
@@ -69,7 +57,7 @@ public abstract class EnchantmentScreenMixin {
 			return;
 		}
 
-		var lapisStack = menu.getSlot(1).getItem();
+		ItemStack lapisStack = menu.getSlot(1).getItem();
 		if (!lapisStack.is(Items.LAPIS_LAZULI) || lapisStack.getCount() < menu.costs[hoveredButton]) {
 			return;
 		}
